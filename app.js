@@ -1,6 +1,6 @@
 // DOM Content Loaded Event Listener
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyA6d1uRgLkrO6GJ6AxHddzc5ycvpSqlEpY",
     authDomain: "stream-cast-developingstorys.firebaseapp.com",
@@ -70,13 +70,12 @@ function initEmailForm() {
 }
 
 function pushEmail(email, onSuccess, onFailure) {
-    set(ref(database, 'waitingList/'), {
+    push(ref(database, 'waitingList/'), {
         email: email,
         timestamp: Date.now()
     }).then((snapshot) => {
         // Data saved successfully!
         onSuccess();
-        emailInput.value = '';
         alert('Thank you for joining our waiting list!');
         document.getElementById('emailInput').value = ''; // Clear the input
     }).catch((error) => {
