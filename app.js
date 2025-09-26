@@ -48,19 +48,6 @@ function initEmailForm() {
                 // Show confirmation message
                 pushEmail(email, showConfirmation(), showEmailError);
                 
-                // Reset form
-                emailInput.value = '';
-                
-                // Clear any previous errors
-                clearEmailError();
-                
-                // Hide confirmation after 5 seconds
-                // setTimeout(function() {
-                //     hideConfirmation();
-                // }, 5000);
-                
-                // Track email submission (placeholder for analytics)
-                console.log('Email submitted successfully:', email);
             } else {
                 console.log('Email is invalid, showing error');
                 // Show validation error
@@ -73,7 +60,7 @@ function initEmailForm() {
             clearEmailError();
         });
     } else {
-        console.error('Email form elements not found');
+        console.log('Error:','Email form elements not found');
     }
 }
 
@@ -89,7 +76,7 @@ function pushEmail(email, onSuccess, onFailure) {
     }).catch((error) => {
         // The write failed...
         alert('There was an error. Please try again.');
-        console.error(error);
+        console.log(error);
         onFailure();
     });
 }
@@ -114,9 +101,24 @@ function showConfirmation() {
         confirmation.style.display = 'block';
         confirmation.classList.add('show');
         console.log('Confirmation message shown');
+
+        // Reset form
+        emailInput.value = '';
+        
+        // Clear any previous errors
+        clearEmailError();
+        
+        // Hide confirmation after 5 seconds
+        // setTimeout(function() {
+        //     hideConfirmation();
+        // }, 5000);
+        
+        // Track email submission (placeholder for analytics)
+        console.log('Email submitted successfully:', email);
     } else {
         console.error('Cannot show confirmation - elements not found');
     }
+
 }
 
 // Hide confirmation message
@@ -198,7 +200,7 @@ function toggleFAQ(button) {
     console.log('FAQ elements:', { faqItem, answer, toggle });
     
     if (!faqItem || !answer || !toggle) {
-        console.error('FAQ elements not found');
+        console.log('Error:','FAQ elements not found');
         return;
     }
     
@@ -274,7 +276,7 @@ function initHeaderScroll() {
     const header = document.querySelector('.header');
     
     if (!header) {
-        console.error('Header element not found');
+        console.log('Error:','Header element not found');
         return;
     }
     
@@ -491,7 +493,7 @@ document.head.appendChild(additionalStyles);
 
 // Error handling
 window.addEventListener('error', function(e) {
-    console.error('JavaScript error:', e.error);
+    console.log('JavaScript error:', e.error);
 });
 
 // Performance optimization - lazy loading for images
