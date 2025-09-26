@@ -1,6 +1,6 @@
 // DOM Content Loaded Event Listener
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database-compat.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyA6d1uRgLkrO6GJ6AxHddzc5ycvpSqlEpY",
     authDomain: "stream-cast-developingstorys.firebaseapp.com",
