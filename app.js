@@ -1,4 +1,22 @@
 // DOM Content Loaded Event Listener
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database-compat.js";
+const firebaseConfig = {
+    apiKey: "AIzaSyA6d1uRgLkrO6GJ6AxHddzc5ycvpSqlEpY",
+    authDomain: "stream-cast-developingstorys.firebaseapp.com",
+    databaseURL: "https://stream-cast-developingstorys-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "stream-cast-developingstorys",
+    storageBucket: "stream-cast-developingstorys.firebasestorage.app",
+    messagingSenderId: "620749100185",
+    appId: "1:620749100185:web:a9521250cb6505a85bd408",
+    measurementId: "G-D2CX0S5H8S"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+console.log(app)
+
+const database = getDatabase(app);
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality
     initEmailForm();
@@ -28,7 +46,7 @@ function initEmailForm() {
             if (validateEmail(email)) {
                 console.log('Email is valid, showing confirmation');
                 // Show confirmation message
-                showConfirmation();
+                pushEmail(email, showConfirmation(), showEmailError);
                 
                 // Reset form
                 emailInput.value = '';
@@ -37,9 +55,9 @@ function initEmailForm() {
                 clearEmailError();
                 
                 // Hide confirmation after 5 seconds
-                setTimeout(function() {
-                    hideConfirmation();
-                }, 5000);
+                // setTimeout(function() {
+                //     hideConfirmation();
+                // }, 5000);
                 
                 // Track email submission (placeholder for analytics)
                 console.log('Email submitted successfully:', email);
@@ -57,6 +75,23 @@ function initEmailForm() {
     } else {
         console.error('Email form elements not found');
     }
+}
+
+function pushEmail(email, onSuccess, onFailure) {
+    database.ref('waitingList').push({
+        email: email,
+        timestamp: Date.now()
+    }).then((snapshot) => {
+        // Data saved successfully!
+        onSuccess();
+        alert('Thank you for joining our waiting list!');
+        document.getElementById('emailInput').value = ''; // Clear the input
+    }).catch((error) => {
+        // The write failed...
+        alert('There was an error. Please try again.');
+        console.error(error);
+        onFailure();
+    });
 }
 
 // Email validation function
