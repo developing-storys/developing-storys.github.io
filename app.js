@@ -1,6 +1,6 @@
 // DOM Content Loaded Event Listener
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyA6d1uRgLkrO6GJ6AxHddzc5ycvpSqlEpY",
     authDomain: "stream-cast-developingstorys.firebaseapp.com",
@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderScroll();
     initFAQFunctionality();
     console.log('StreamCast app initialized');
+    const waitListRef = ref(database, 'waitingList');
+    onValue(waitListRef, (snapshot) => {
+      console.log("LOG_TAG--- app-line#29:", snapshot.val())
+    });
+
 });
 
 // Email Form Functionality
@@ -71,6 +76,7 @@ function pushEmail(email, onSuccess, onFailure) {
     }).then((snapshot) => {
         // Data saved successfully!
         onSuccess();
+        emailInput.value = '';
         alert('Thank you for joining our waiting list!');
         document.getElementById('emailInput').value = ''; // Clear the input
     }).catch((error) => {
@@ -103,7 +109,7 @@ function showConfirmation() {
         console.log('Confirmation message shown');
 
         // Reset form
-        emailInput.value = '';
+        // emailInput.value = '';
         
         // Clear any previous errors
         clearEmailError();
