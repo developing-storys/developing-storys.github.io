@@ -51,7 +51,7 @@ function initEmailForm() {
             if (validateEmail(email)) {
                 console.log('Email is valid, showing confirmation');
                 // Show confirmation message
-                pushEmail(email, showConfirmation(), showEmailError);
+                pushEmail(email, showConfirmation, showEmailError);
                 
             } else {
                 console.log('Email is invalid, showing error');
@@ -119,7 +119,7 @@ function showConfirmation() {
         // }, 5000);
         
         // Track email submission (placeholder for analytics)
-        console.log('Email submitted successfully:', email);
+        console.log('Email submitted successfully:');
     } else {
         console.error('Cannot show confirmation - elements not found');
     }
