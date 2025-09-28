@@ -1,0 +1,25 @@
+{
+  "name": "stream-cast-functions",
+  "version": "1.0.0",
+  "description": "stream cast backend",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^12.3.0",
+    "firebase-admin": "^13.5.0",
+    "firebase-functions": "^6.4.0"
+  },
+  "scripts": {
+    "deloy": "firebase deploy --only functions",
+    "start": "firebase emulators:start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/home/sabbib/IdeaProjects/StreamCast/LandingPage"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "firebase-tools": "^14.17.0"
+  }
+}
