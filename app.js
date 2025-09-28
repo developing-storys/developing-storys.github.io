@@ -77,7 +77,6 @@ function pushEmail(email, onSuccess, onFailure) {
         // Data saved successfully!
         onSuccess();
         alert('Thank you for joining our waiting list!');
-        document.getElementById('emailInput').value = ''; // Clear the input
     }).catch((error) => {
         // The write failed...
         alert('There was an error. Please try again.');
